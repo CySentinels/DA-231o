@@ -193,6 +193,8 @@ svm = LinearSVC(labelCol="label", featuresCol="features")
 paramGrid = ParamGridBuilder().addGrid(svm.maxIter, [50, 100]) \
                               .addGrid(svm.regParam, [0.01, 0.1]) \
                               .build()
+# Setting Up Cross-Validation for SVM Model
+svm_cv = CrossValidator(estimator=svm, estimatorParamMaps=paramGrid, evaluator=evaluator, numFolds=3)
 # Training, Testing, and Evaluating the SVM Model
 # Start time for training
 start_train_time = time.time()
